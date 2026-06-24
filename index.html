@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="1000+ 实用在线工具集 — 免费、快速、无需安装。涵盖开发、设计、文本、安全、生产力等类别。">
+  <title>ToolKit · 千工</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand" data-nav="home">
+        <svg class="nav-logo" width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect x="2" y="2" width="24" height="24" rx="6" stroke="currentColor" stroke-width="2"/>
+          <path d="M9 10h10M9 14h10M9 18h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>千工</span>
+      </a>
+      <div class="nav-center">
+        <div class="search-box">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input type="text" class="search-input" id="searchInput" placeholder="搜索工具…" autocomplete="off">
+        </div>
+        <div class="category-filter" id="categoryFilter">
+          <button class="cat-btn active" data-cat="all">全部</button>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <circle cx="9" cy="9" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M9 1v2M9 15v2M1 9h2M15 9h2M3.3 3.3l1.4 1.4M13.3 13.3l1.4 1.4M3.3 14.7l1.4-1.4M13.3 4.7l1.4-1.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" style="display:none">
+            <path d="M15 10.5A7 7 0 017.5 3a7 7 0 107.5 7.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="nav-menu-btn" id="navMenuBtn" aria-label="菜单">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main" id="main">
+    <!-- Home Grid -->
+    <section class="home-section" id="homeSection">
+      <div class="home-header">
+        <h1 class="home-title">实用工具集</h1>
+        <p class="home-subtitle">免费 · 在线 · 无需安装 &nbsp;|&nbsp; <span id="toolCount">10</span> 个工具 · 持续增长中</p>
+      </div>
+      <div class="tools-grid" id="toolsGrid"></div>
+    </section>
+
+    <!-- Tool Detail -->
+    <section class="tool-section" id="toolSection" style="display:none">
+      <button class="back-btn" id="backBtn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        返回
+      </button>
+      <div id="toolContainer"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>ToolKit · 千工</span>
+      <span class="footer-dot">·</span>
+      <span>开源 · 自由使用</span>
+      <span class="footer-dot">·</span>
+      <span>目标：<strong>1000+</strong> 实用工具</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/tools/qr-generator.js"></script>
+  <script src="js/tools/password-generator.js"></script>
+  <script src="js/tools/text-analyzer.js"></script>
+  <script src="js/tools/json-formatter.js"></script>
+  <script src="js/tools/base64.js"></script>
+  <script src="js/tools/color-palette.js"></script>
+  <script src="js/tools/pomodoro.js"></script>
+  <script src="js/tools/url-encoder.js"></script>
+  <script src="js/tools/uuid-generator.js"></script>
+  <script src="js/tools/markdown-preview.js"></script>
+</body>
+</html>
