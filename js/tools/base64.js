@@ -1,89 +1,118 @@
-﻿// Tool :: Base64 Encoder / Decoder
+﻿// Tool :: Base64 Encoder / Decoder - Enhanced with file support
 (function () {
-  const id = "base64";
-  const title = "Base64 编解码";
-  const icon = "\u2194\uFE0F";
-  const category = "开发者";
-  const description = "将文本编码为 Base64 或解码 Base64 为原始文本";
-
+  var id = "base64";
+  var title = "Base64 Encode / Decode";
+  var icon = "\u2194\ufe0f";
+  var category = "Developer";
+  var description = "Encode text/files to Base64 or decode Base64 back to text";
   window.toolMeta.push({ id, title, icon, category, description });
-
   window.tools[id] = {
-    id, title, icon,
-    render() {
-      const box = document.createElement("div");
+    id: id, title: title, icon: icon,
+    render: function () {
+      var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = `
-        <div class="tool-header">
-          <span class="tool-header-icon">${icon}</span>
-          <h2>${title}</h2>
-        </div>
-        <div class="tool-content">
-          <div class="tab-bar" id="b64TabBar">
-            <button class="tab-btn active" data-tab="encode">编码 (→)</button>
-            <button class="tab-btn" data-tab="decode">解码 (←)</button>
-          </div>
-          <textarea id="b64Input" rows="6" placeholder="输入文本…" spellcheck="false"></textarea>
-          <div class="btn-group">
-            <button class="btn btn-primary" id="b64RunBtn">执行</button>
-            <button class="btn btn-secondary" id="b64SwapBtn">互换</button>
-            <button class="btn btn-secondary" id="b64ClearBtn">清空</button>
-          </div>
-          <div class="output-box" id="b64Output" style="word-break:break-all">结果</div>
-        </div>
-      `;
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+        "<div class=\"tool-content\">" +
+        "<div class=\"tab-bar\" id=\"b64TabBar\">" +
+        "  <button class=\"tab-btn active\" data-tab=\"encode\">Encode</button>" +
+        "  <button class=\"tab-btn\" data-tab=\"decode\">Decode</button>" +
+        "  <button class=\"tab-btn\" data-tab=\"file\">File to Base64</button>" +
+        "</div>" +
+        "<textarea id=\"b64Input\" rows=\"5\" placeholder=\"Enter text...\" spellcheck=\"false\"></textarea>" +
+        "<div id=\"b64FileArea\" style=\"display:none\">" +
+        "  <label>Upload File</label>" +
+        "  <div id=\"b64Dropzone\" style=\"border:2px dashed var(--bg-input-border);border-radius:var(--radius-md);padding:30px 20px;text-align:center;color:var(--text-tertiary);cursor:pointer\">Click to select file</div>" +
+        "  <div style=\"font-size:0.75rem;color:var(--text-tertiary);margin-top:4px\" id=\"b64FileName\"></div>" +
+        "</div>" +
+        "<div class=\"btn-group\">" +
+        "  <button class=\"btn btn-primary\" id=\"b64RunBtn\">Execute</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"b64SwapBtn\">Swap</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"b64ClearBtn\">Clear</button>" +
+        "</div>" +
+        "<label>Result</label>" +
+        "<textarea id=\"b64Output\" rows=\"4\" readonly style=\"font-family:var(--font-mono);font-size:0.75rem;word-break:break-all\"></textarea>" +
+        "<button class=\"btn btn-secondary\" id=\"b64CopyBtn\">Copy Result</button>" +
+        "</div>";
       return box;
     },
-    init() {
-      const input = document.getElementById("b64Input");
-      const output = document.getElementById("b64Output");
-      const runBtn = document.getElementById("b64RunBtn");
-      const swapBtn = document.getElementById("b64SwapBtn");
-      const clearBtn = document.getElementById("b64ClearBtn");
-      const tabBar = document.getElementById("b64TabBar");
-      let mode = "encode";
+    init: function () {
+      var input = document.getElementById("b64Input");
+      var output = document.getElementById("b64Output");
+      var runBtn = document.getElementById("b64RunBtn");
+      var swapBtn = document.getElementById("b64SwapBtn");
+      var clearBtn = document.getElementById("b64ClearBtn");
+      var copyBtn = document.getElementById("b64CopyBtn");
+      var tabBar = document.getElementById("b64TabBar");
+      var fileArea = document.getElementById("b64FileArea");
+      var dropzone = document.getElementById("b64Dropzone");
+      var fileName = document.getElementById("b64FileName");
+      var mode = "encode";
+      var fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.style.display = "none";
+      document.body.appendChild(fileInput);
 
-      tabBar.addEventListener("click", (e) => {
-        const btn = e.target.closest(".tab-btn");
+      tabBar.addEventListener("click", function (e) {
+        var btn = e.target.closest(".tab-btn");
         if (!btn) return;
-        tabBar.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        tabBar.querySelectorAll(".tab-btn").forEach(function (b) { b.classList.remove("active"); });
         btn.classList.add("active");
         mode = btn.dataset.tab;
-        input.placeholder = mode === "encode" ? "输入文本…" : "输入 Base64…";
+        if (mode === "file") { fileArea.style.display = "block"; input.style.display = "none"; }
+        else { fileArea.style.display = "none"; input.style.display = ""; }
+        input.placeholder = mode === "encode" ? "Enter text..." : "Enter Base64...";
         run();
       });
 
-      const run = () => {
+      function run() {
         try {
           if (mode === "encode") {
-            output.textContent = btoa(unescape(encodeURIComponent(input.value)));
-          } else {
-            output.textContent = decodeURIComponent(escape(atob(input.value.trim())));
+            output.value = btoa(unescape(encodeURIComponent(input.value)));
+          } else if (mode === "decode") {
+            output.value = decodeURIComponent(escape(atob(input.value.trim())));
           }
         } catch (e) {
-          output.textContent = "❌ 错误: " + e.message;
+          output.value = "Error: " + e.message;
         }
-      };
+      }
 
-      runBtn.addEventListener("click", run);
-      swapBtn.addEventListener("click", () => {
-        const cur = output.textContent;
-        if (cur && !cur.startsWith("❌")) {
+      runBtn.addEventListener("click", function () {
+        if (mode === "file" && fileInput.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) { output.value = e.target.result; };
+          reader.readAsDataURL(fileInput.files[0]);
+        } else { run(); }
+      });
+
+      swapBtn.addEventListener("click", function () {
+        var cur = output.value;
+        if (cur && !cur.startsWith("Error")) {
           input.value = cur;
-          const active = tabBar.querySelector(".tab-btn.active");
-          const other = tabBar.querySelector('.tab-btn:not(.active)');
-          if (other) {
-            tabBar.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-            other.classList.add("active");
-            mode = other.dataset.tab;
-            input.placeholder = mode === "encode" ? "输入文本…" : "输入 Base64…";
-          }
-          run();
+          var oldMode = mode;
+          if (oldMode === "encode") { mode = "decode"; tabBar.querySelector("[data-tab='decode']").click(); }
+          else if (oldMode === "decode") { mode = "encode"; tabBar.querySelector("[data-tab='encode']").click(); }
         }
       });
-      clearBtn.addEventListener("click", () => { input.value = ""; output.textContent = "结果"; });
-      run();
+
+      clearBtn.addEventListener("click", function () {
+        input.value = ""; output.value = ""; fileInput.value = "";
+        fileName.textContent = "";
+        dropzone.textContent = "Click to select file";
+      });
+
+      copyBtn.addEventListener("click", function () { if (output.value) copyToClipboard(output.value); });
+
+      dropzone.addEventListener("click", function () { fileInput.click(); });
+      fileInput.addEventListener("change", function () {
+        if (fileInput.files[0]) {
+          fileName.textContent = fileInput.files[0].name + " (" + Math.round(fileInput.files[0].size / 1024) + " KB)";
+          dropzone.textContent = "File selected";
+        }
+      });
     },
-    destroy() {}
+    destroy: function () {
+      var fi = document.querySelector("input[type='file'][style*='display:none']");
+      if (fi) fi.remove();
+    }
   };
 })();
