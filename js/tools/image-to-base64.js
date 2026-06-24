@@ -1,4 +1,4 @@
-﻿// Tool :: Image to Base64 Converter
+// Tool :: Image to Base64 Converter
 (function () {
   var id = "image-to-base64";
   var title = "Image to Base64";
@@ -11,19 +11,19 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
-        "<label>Upload Image</label>" +
+        "<label>" + __("tool.image-to-base64.uploadImage") + "</label>" +
         "<input type=\"file\" id=\"imgB64Input\" accept=\"image/*\">" +
         "<div class=\"btn-group\">" +
-        "  <button class=\"btn btn-secondary\" id=\"imgB64ClearBtn\">Clear</button>" +
-        "  <button class=\"btn btn-secondary\" id=\"imgB64CopyBtn\">Copy Base64</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"imgB64ClearBtn\">" + __("common.clear") + "</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"imgB64CopyBtn\">" + __("tool.image-to-base64.copyBase64") + "</button>" +
         "</div>" +
         "<div id=\"imgB64Preview\" style=\"max-width:200px;margin:8px 0;border-radius:var(--radius-md);display:none\"></div>" +
-        "<label>Base64 Data URL</label>" +
+        "<label>" + __("tool.image-to-base64.base64DataUrl") + "</label>" +
         "<textarea id=\"imgB64Output\" rows=\"5\" readonly style=\"font-size:0.75rem;font-family:var(--font-mono)\"></textarea>" +
-        "<label>Or drag & drop image here</label>" +
-        "<div id=\"imgB64Dropzone\" style=\"border:2px dashed var(--bg-input-border);border-radius:var(--radius-md);padding:40px 20px;text-align:center;color:var(--text-tertiary);cursor:pointer;transition:all var(--transition)\">Drop image here</div>" +
+        "<label>" + __("tool.image-to-base64.dragDrop") + "</label>" +
+        "<div id=\"imgB64Dropzone\" style=\"border:2px dashed var(--bg-input-border);border-radius:var(--radius-md);padding:40px 20px;text-align:center;color:var(--text-tertiary);cursor:pointer;transition:all var(--transition)\">" + __("tool.image-to-base64.dropHere") + "</div>" +
         "</div>";
       return box;
     },
@@ -43,7 +43,7 @@
           output.value = dataUrl;
           preview.innerHTML = "<img src=\"" + dataUrl + "\" style=\"max-width:100%;border-radius:var(--radius-sm)\">";
           preview.style.display = "block";
-          dropzone.textContent = "Drop another image";
+          dropzone.textContent = __("tool.image-to-base64.dropAnother");
           dropzone.style.borderColor = "var(--green)";
         };
         reader.readAsDataURL(file);
@@ -75,7 +75,7 @@
         preview.innerHTML = "";
         preview.style.display = "none";
         fileInput.value = "";
-        dropzone.textContent = "Drop image here";
+        dropzone.textContent = __("tool.image-to-base64.dropHere");
         dropzone.style.borderColor = "var(--bg-input-border)";
       });
 

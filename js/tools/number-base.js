@@ -1,4 +1,4 @@
-﻿// Tool :: Number Base Converter
+// Tool :: Number Base Converter
 (function () {
   var id = "number-base";
   var title = "Number Base Converter";
@@ -11,34 +11,34 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
-        "<label>Input</label>" +
+        "<label>" + __("common.input") + "</label>" +
         "<div class=\"flex-row\">" +
         "  <select id=\"nbFrom\" style=\"width:120px\">" +
-        "    <option value=\"2\">Binary (2)</option>" +
-        "    <option value=\"8\">Octal (8)</option>" +
-        "    <option value=\"10\" selected>Decimal (10)</option>" +
-        "    <option value=\"16\">Hex (16)</option>" +
+        "    <option value=\"2\">" + __("tool.number-base.binary") + " (2)</option>" +
+        "    <option value=\"8\">" + __("tool.number-base.octal") + " (8)</option>" +
+        "    <option value=\"10\" selected>" + __("tool.number-base.decimal") + " (10)</option>" +
+        "    <option value=\"16\">" + __("tool.number-base.hexadecimal") + " (16)</option>" +
         "  </select>" +
         "  <input type=\"text\" id=\"nbInput\" value=\"255\" style=\"flex:1\">" +
         "</div>" +
-        "<button class=\"btn btn-primary\" id=\"nbConvertBtn\">Convert</button>" +
+        "<button class=\"btn btn-primary\" id=\"nbConvertBtn\">" + __("common.convert") + "</button>" +
         "<div class=\"grid-2\">" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
-        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">Binary</div>" +
+        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">" + __("tool.number-base.binary") + "</div>" +
         "    <div style=\"word-break:break-all;font-family:var(--font-mono);font-size:0.8125rem\" id=\"nbBin\">-</div>" +
         "  </div>" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
-        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">Octal</div>" +
+        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">" + __("tool.number-base.octal") + "</div>" +
         "    <div style=\"font-family:var(--font-mono);font-size:0.8125rem\" id=\"nbOct\">-</div>" +
         "  </div>" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
-        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">Decimal</div>" +
+        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">" + __("tool.number-base.decimal") + "</div>" +
         "    <div style=\"font-family:var(--font-mono);font-size:0.8125rem\" id=\"nbDec\">-</div>" +
         "  </div>" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
-        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">Hexadecimal</div>" +
+        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">" + __("tool.number-base.hexadecimal") + "</div>" +
         "    <div style=\"font-family:var(--font-mono);font-size:0.8125rem;text-transform:uppercase\" id=\"nbHex\">-</div>" +
         "  </div>" +
         "</div>" +
@@ -58,13 +58,13 @@
         try {
           var base = parseInt(from.value);
           var val = parseInt(input.value, base);
-          if (isNaN(val)) { bin.textContent = oct.textContent = dec.textContent = hex.textContent = "invalid"; return; }
+          if (isNaN(val)) { bin.textContent = oct.textContent = dec.textContent = hex.textContent = __("tool.number-base.invalid"); return; }
           bin.textContent = val.toString(2);
           oct.textContent = val.toString(8);
           dec.textContent = val.toString(10);
           hex.textContent = val.toString(16).toUpperCase();
         } catch (e) {
-          bin.textContent = oct.textContent = dec.textContent = hex.textContent = "error";
+          bin.textContent = oct.textContent = dec.textContent = hex.textContent = __("tool.number-base.error");
         }
       }
 

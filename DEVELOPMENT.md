@@ -1,4 +1,4 @@
-﻿# ToolKit · QianGong — Tool Development Guide
+# ToolKit · QianGong — Tool Development Guide
 
 This document describes how to add new tools to the ToolKit project. Follow this guide if you are an AI coding agent extending the tool collection.
 
@@ -107,6 +107,19 @@ Add a `<script>` tag at the bottom of `index.html`:
 7. **Strings use + concatenation** — prefer array .join("") over template literals.
 8. **Register right away** — the IIFE must push to toolMeta and tools synchronously.
 
+### Multi-language (i18n) Rules
+
+The project supports **Chinese (zh-CN, default)** and **English (en)** switching.
+
+1. **Translation storage** — all UI strings are defined in `_langMap` inside `js/utils.js`. Add new entries for both `'zh-CN'` and `'en'` when introducing new text.
+2. **Translate function** — use `__(key, vars)` to get a translated string. Pass `{n}` replacement value as the second argument for dynamic numbers.
+3. **Static HTML text** — add a `data-i18n="key"` attribute to the element. The `setLang()` function updates it automatically. For placeholder text, use `data-i18n-placeholder="key"`.
+4. **Dynamic text** — for text generated in JavaScript (e.g. "没有找到匹配的工具"), call `__('key')` directly at render time.
+5. **Language toggle** — the `#langToggle` button is always visible in the nav. It calls `setLang()` which triggers a `langchange` event. Listen for this event to update dynamic UI.
+6. **New tool strings** — if a tool's UI contains user-visible text (labels, button text, placeholder, hints), extract it into `_langMap` and use `__()` instead of hardcoded strings. Follow the pattern `tool.{toolId}.{field}` for keys.
+7. **Category names** — category names displayed in the filter buttons come directly from `toolMeta.category` and are shown as-is (they are typically in English e.g. "Developer", "Text"). The "全部"/"All" button is translated via `data-i18n="cat.all"`. New tools must set `category` to one of the existing category names.
+8. **Persist preference** — the selected language is saved to `localStorage` under key `'tk-lang'` and restored on page load.
+
 ---
 
 ## Categories
@@ -150,6 +163,10 @@ Before committing a new tool, verify:
 - [ ] Script is registered in index.html
 - [ ] Works in dark mode and light mode
 - [ ] Responsive on mobile (test at 375px width)
+- [ ] **i18n**: All user-facing strings use `__()` or `data-i18n` (not hardcoded Chinese)
+- [ ] **i18n**: Both `zh-CN` and `en` entries added in `_langMap` for new strings
+- [ ] **Mobile**: Category filter available via hamburger menu on narrow screens
+- [ ] **Mobile**: Touch targets are at least 36px; layout does not overflow
 
 ---
 

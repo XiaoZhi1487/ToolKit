@@ -1,71 +1,71 @@
 // Tool :: URL Encoder / Decoder
 (function () {
-  const id = "url-encoder";
-  const title = "URL 编解码";
-  const icon = "\uD83D\uDD17";
-  const category = "开发者";
-  const description = "编码或解码 URL 字符串";
+  var id = "url-encoder";
+  var title = "URL Encoder / Decoder";
+  var icon = "\uD83D\uDD17";
+  var category = "Developer";
+  var description = "Encode or decode URL strings";
 
   window.toolMeta.push({ id, title, icon, category, description });
 
-  window.tools[id] = { id, title, icon,
-    render() {
-      const box = document.createElement("div");
+  window.tools[id] = { id: id, title: title, icon: icon,
+    render: function () {
+      var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = `
-        <div class="tool-header">
-          <span class="tool-header-icon">${icon}</span>
-          <h2>${title}</h2>
-        </div>
-        <div class="tool-content">
-          <div class="tab-bar" id="urlTabBar">
-            <button class="tab-btn active" data-tab="encode">编码</button>
-            <button class="tab-btn" data-tab="decode">解码</button>
-          </div>
-          <label>输入</label>
-          <textarea id="urlInput" rows="4" placeholder="输入 URL 或文本…" spellcheck="false"></textarea>
-          <div class="btn-group">
-            <button class="btn btn-primary" id="urlRunBtn">执行</button>
-            <button class="btn btn-secondary" id="urlSwapBtn">互换</button>
-          </div>
-          <label>结果</label>
-          <div class="output-box" id="urlOutput">结果</div>
-        </div>
-      `;
+      box.innerHTML = [
+        "<div class=\"tool-header\">",
+        "  <span class=\"tool-header-icon\">" + icon + "</span>",
+        "  <h2>" + __('tool.' + id + '.title') + "</h2>",
+        "</div>",
+        "<div class=\"tool-content\">",
+        "  <div class=\"tab-bar\" id=\"urlTabBar\">",
+        "    <button class=\"tab-btn active\" data-tab=\"encode\">" + __('tool.' + id + '.tabEncode') + "</button>",
+        "    <button class=\"tab-btn\" data-tab=\"decode\">" + __('tool.' + id + '.tabDecode') + "</button>",
+        "  </div>",
+        "  <label>" + __('common.input') + "</label>",
+        "  <textarea id=\"urlInput\" rows=\"4\" placeholder=\"" + __('common.input') + "\" spellcheck=\"false\"></textarea>",
+        "  <div class=\"btn-group\">",
+        "    <button class=\"btn btn-primary\" id=\"urlRunBtn\">" + __('common.execute') + "</button>",
+        "    <button class=\"btn btn-secondary\" id=\"urlSwapBtn\">" + __('common.swap') + "</button>",
+        "  </div>",
+        "  <label>" + __('common.result') + "</label>",
+        "  <div class=\"output-box\" id=\"urlOutput\">" + __('common.result') + "</div>",
+        "</div>"
+      ].join("");
       return box;
     },
-    init() {
-      const input = document.getElementById("urlInput");
-      const output = document.getElementById("urlOutput");
-      const runBtn = document.getElementById("urlRunBtn");
-      const swapBtn = document.getElementById("urlSwapBtn");
-      const tabBar = document.getElementById("urlTabBar");
-      let mode = "encode";
-      tabBar.addEventListener("click", (e) => {
-        const btn = e.target.closest(".tab-btn");
+    init: function () {
+      var input = document.getElementById("urlInput");
+      var output = document.getElementById("urlOutput");
+      var runBtn = document.getElementById("urlRunBtn");
+      var swapBtn = document.getElementById("urlSwapBtn");
+      var tabBar = document.getElementById("urlTabBar");
+      var mode = "encode";
+      tabBar.addEventListener("click", function (e) {
+        var btn = e.target.closest(".tab-btn");
         if (!btn) return;
-        tabBar.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        tabBar.querySelectorAll(".tab-btn").forEach(function (b) { b.classList.remove("active"); });
         btn.classList.add("active");
         mode = btn.dataset.tab;
         run();
       });
-      const run = () => {
+      function run() {
         try {
           output.textContent = mode === "encode"
             ? encodeURIComponent(input.value)
             : decodeURIComponent(input.value);
         } catch (e) {
-          output.textContent = "\u274C 错误: " + e.message;
+          output.textContent = "\u274C " + __('common.result') + ": " + e.message;
         }
-      };
+      }
       runBtn.addEventListener("click", run);
-      swapBtn.addEventListener("click", () => {
-        const cur = output.textContent;
+      swapBtn.addEventListener("click", function () {
+        var cur = output.textContent;
         if (cur && !cur.startsWith("\u274C")) {
           input.value = cur;
-          const other = tabBar.querySelector(".tab-btn:not(.active)");
+          var other = tabBar.querySelector(".tab-btn:not(.active)");
           if (other) {
-            tabBar.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+            tabBar.querySelectorAll(".tab-btn").forEach(function (b) { b.classList.remove("active"); });
             other.classList.add("active");
             mode = other.dataset.tab;
           }
@@ -74,6 +74,6 @@
       });
       run();
     },
-    destroy() {}
+    destroy: function () {}
   };
 })();

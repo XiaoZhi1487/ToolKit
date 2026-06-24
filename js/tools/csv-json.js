@@ -1,4 +1,4 @@
-﻿// Tool :: CSV ↔ JSON Converter
+// Tool :: CSV ↔ JSON Converter
 (function () {
   var id = "csv-json";
   var title = "CSV ↔ JSON";
@@ -11,19 +11,19 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
         "<div class=\"tab-bar\" id=\"cjTabBar\">" +
-        "  <button class=\"tab-btn active\" data-mode=\"csv2json\">CSV → JSON</button>" +
-        "  <button class=\"tab-btn\" data-mode=\"json2csv\">JSON → CSV</button>" +
+        "  <button class=\"tab-btn active\" data-mode=\"csv2json\">" + __("tool.csv-json.tabCsv2Json") + "</button>" +
+        "  <button class=\"tab-btn\" data-mode=\"json2csv\">" + __("tool.csv-json.tabJson2Csv") + "</button>" +
         "</div>" +
         "<textarea id=\"cjInput\" rows=\"6\" spellcheck=\"false\">name,age,city\nAlice,30,New York\nBob,25,London\nCharlie,35,Tokyo</textarea>" +
         "<div class=\"btn-group\">" +
-        "  <button class=\"btn btn-primary\" id=\"cjRunBtn\">Convert</button>" +
-        "  <button class=\"btn btn-secondary\" id=\"cjSwapBtn\">Swap</button>" +
-        "  <button class=\"btn btn-secondary\" id=\"cjCopyBtn\">Copy</button>" +
+        "  <button class=\"btn btn-primary\" id=\"cjRunBtn\">" + __("common.convert") + "</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"cjSwapBtn\">" + __("common.swap") + "</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"cjCopyBtn\">" + __("common.copy") + "</button>" +
         "</div>" +
-        "<label>Result</label>" +
+        "<label>" + __("common.result") + "</label>" +
         "<textarea id=\"cjOutput\" rows=\"6\" readonly style=\"font-family:var(--font-mono);font-size:0.75rem\"></textarea>" +
         "</div>";
       return box;

@@ -1,4 +1,4 @@
-﻿// Tool :: Lorem Ipsum Generator
+// Tool :: Lorem Ipsum Generator
 (function () {
   var id = "lorem-ipsum";
   var title = "Lorem Ipsum Generator";
@@ -41,19 +41,19 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
-        "<label>Type</label>" +
+        "<label>" + __("tool.lorem-ipsum.type") + "</label>" +
         "<div class=\"tab-bar\" id=\"liTabBar\">" +
-        "  <button class=\"tab-btn active\" data-type=\"words\">Words</button>" +
-        "  <button class=\"tab-btn\" data-type=\"sentences\">Sentences</button>" +
-        "  <button class=\"tab-btn\" data-type=\"paragraphs\">Paragraphs</button>" +
+        "  <button class=\"tab-btn active\" data-type=\"words\">" + __("tool.lorem-ipsum.words") + "</button>" +
+        "  <button class=\"tab-btn\" data-type=\"sentences\">" + __("tool.lorem-ipsum.sentences") + "</button>" +
+        "  <button class=\"tab-btn\" data-type=\"paragraphs\">" + __("tool.lorem-ipsum.paragraphs") + "</button>" +
         "</div>" +
-        "<label>Count</label>" +
+        "<label>" + __("tool.lorem-ipsum.count") + "</label>" +
         "<input type=\"number\" id=\"liCount\" value=\"3\" min=\"1\" max=\"100\" style=\"width:100px\">" +
         "<div class=\"btn-group\">" +
-        "  <button class=\"btn btn-primary\" id=\"liGenBtn\">Generate</button>" +
-        "  <button class=\"btn btn-secondary\" id=\"liCopyBtn\">Copy</button>" +
+        "  <button class=\"btn btn-primary\" id=\"liGenBtn\">" + __("common.generate") + "</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"liCopyBtn\">" + __("common.copy") + "</button>" +
         "</div>" +
         "<textarea id=\"liOutput\" rows=\"8\" readonly style=\"font-size:0.875rem\"></textarea>" +
         "</div>";

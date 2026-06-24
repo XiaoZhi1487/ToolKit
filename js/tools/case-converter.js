@@ -1,4 +1,4 @@
-﻿// Tool :: Case Converter
+// Tool :: Case Converter
 (function () {
   var id = "case-converter";
   var title = "Case Converter";
@@ -11,23 +11,23 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
-        "<label>Input text</label>" +
-        "<textarea id=\"ccInput\" rows=\"4\" placeholder=\"Type or paste text here...\"></textarea>" +
+        "<label>" + __("common.input") + "</label>" +
+        "<textarea id=\"ccInput\" rows=\"4\" placeholder=\"" + __("tool.case-converter.placeholder") + "\"></textarea>" +
         "<div class=\"grid-2\">" +
-        "  <button class=\"btn btn-secondary\" data-case=\"upper\">UPPERCASE</button>" +
-        "  <button class=\"btn btn-secondary\" data-case=\"lower\">lowercase</button>" +
-        "  <button class=\"btn btn-secondary\" data-case=\"title\">Title Case</button>" +
-        "  <button class=\"btn btn-secondary\" data-case=\"sentence\">Sentence case</button>" +
-        "  <button class=\"btn btn-secondary\" data-case=\"camel\">camelCase</button>" +
-        "  <button class=\"btn btn-secondary\" data-case=\"pascal\">PascalCase</button>" +
-        "  <button class=\"btn btn-secondary\" data-case=\"snake\">snake_case</button>" +
-        "  <button class=\"btn btn-secondary\" data-case=\"kebab\">kebab-case</button>" +
+        "  <button class=\"btn btn-secondary\" data-case=\"upper\">" + __("tool.case-converter.upper") + "</button>" +
+        "  <button class=\"btn btn-secondary\" data-case=\"lower\">" + __("tool.case-converter.lower") + "</button>" +
+        "  <button class=\"btn btn-secondary\" data-case=\"title\">" + __("tool.case-converter.titleCase") + "</button>" +
+        "  <button class=\"btn btn-secondary\" data-case=\"sentence\">" + __("tool.case-converter.sentenceCase") + "</button>" +
+        "  <button class=\"btn btn-secondary\" data-case=\"camel\">" + __("tool.case-converter.camelCase") + "</button>" +
+        "  <button class=\"btn btn-secondary\" data-case=\"pascal\">" + __("tool.case-converter.pascalCase") + "</button>" +
+        "  <button class=\"btn btn-secondary\" data-case=\"snake\">" + __("tool.case-converter.snakeCase") + "</button>" +
+        "  <button class=\"btn btn-secondary\" data-case=\"kebab\">" + __("tool.case-converter.kebabCase") + "</button>" +
         "</div>" +
-        "<label>Result</label>" +
-        "<div class=\"output-box\" id=\"ccOutput\">Result</div>" +
-        "<button class=\"btn btn-secondary\" id=\"ccCopyBtn\">Copy</button>" +
+        "<label>" + __("common.result") + "</label>" +
+        "<div class=\"output-box\" id=\"ccOutput\">" + __("common.result") + "</div>" +
+        "<button class=\"btn btn-secondary\" id=\"ccCopyBtn\">" + __("common.copy") + "</button>" +
         "</div>";
       return box;
     },
@@ -55,7 +55,7 @@
       });
 
       copyBtn.addEventListener("click", function () {
-        if (output.textContent && output.textContent !== "Result") copyToClipboard(output.textContent);
+        if (output.textContent && output.textContent !== __("common.result")) copyToClipboard(output.textContent);
       });
     },
     destroy: function () {}

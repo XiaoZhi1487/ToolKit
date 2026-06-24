@@ -1,4 +1,4 @@
-﻿// Tool :: Regex Tester
+// Tool :: Regex Tester
 (function () {
   var id = "regex-tester";
   var title = "Regex Tester";
@@ -11,33 +11,33 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
-        "<label>Regular Expression</label>" +
+        "<label>" + __("tool.regex-tester.regex") + "</label>" +
         "<div class=\"flex-row\">" +
-        "  <input type=\"text\" id=\"rtPattern\" value=\"(\\\\w+)@(\\\\w+)\\.(\\\\w+)\" placeholder=\"Enter regex pattern\" style=\"flex:1;font-family:var(--font-mono)\">" +
+        "  <input type=\"text\" id=\"rtPattern\" value=\"(\\\\w+)@(\\\\w+)\\.(\\\\w+)\" placeholder=\"" + __("tool.regex-tester.regexPlaceholder") + "\" style=\"flex:1;font-family:var(--font-mono)\">" +
         "  <label class=\"toggle-wrap\" style=\"flex-shrink:0\"><input type=\"checkbox\" id=\"rtGlobal\" checked><span class=\"toggle-label\">g</span></label>" +
         "  <label class=\"toggle-wrap\" style=\"flex-shrink:0\"><input type=\"checkbox\" id=\"rtCaseInsensitive\"><span class=\"toggle-label\">i</span></label>" +
         "  <label class=\"toggle-wrap\" style=\"flex-shrink:0\"><input type=\"checkbox\" id=\"rtMultiline\"><span class=\"toggle-label\">m</span></label>" +
         "</div>" +
-        "<label>Test String</label>" +
-        "<textarea id=\"rtInput\" rows=\"5\" placeholder=\"Enter test string...\">hello@example.com and world@test.org</textarea>" +
+        "<label>" + __("tool.regex-tester.testString") + "</label>" +
+        "<textarea id=\"rtInput\" rows=\"5\" placeholder=\"" + __("tool.regex-tester.testStringPlaceholder") + "\">hello@example.com and world@test.org</textarea>" +
         "<div class=\"btn-group\">" +
-        "  <button class=\"btn btn-primary\" id=\"rtTestBtn\">Test</button>" +
-        "  <button class=\"btn btn-secondary\" id=\"rtClearBtn\">Clear</button>" +
+        "  <button class=\"btn btn-primary\" id=\"rtTestBtn\">" + __("tool.regex-tester.test") + "</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"rtClearBtn\">" + __("common.clear") + "</button>" +
         "</div>" +
         "<div class=\"grid-2\">" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
-        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">Matches</div>" +
+        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">" + __("tool.regex-tester.matches") + "</div>" +
         "    <div style=\"font-size:1.5rem;font-weight:700\" id=\"rtCount\">0</div>" +
         "  </div>" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
-        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">Time (ms)</div>" +
+        "    <div style=\"font-size:0.75rem;color:var(--text-tertiary)\">" + __("tool.regex-tester.timeMs") + "</div>" +
         "    <div style=\"font-size:1.5rem;font-weight:700\" id=\"rtTime\">0</div>" +
         "  </div>" +
         "</div>" +
-        "<label>Match Details</label>" +
-        "<div class=\"output-box\" id=\"rtDetails\" style=\"font-family:var(--font-mono);font-size:0.75rem;max-height:200px;overflow-y:auto;white-space:pre\">No matches</div>" +
+        "<label>" + __("tool.regex-tester.matchDetails") + "</label>" +
+        "<div class=\"output-box\" id=\"rtDetails\" style=\"font-family:var(--font-mono);font-size:0.75rem;max-height:200px;overflow-y:auto;white-space:pre\">" + __("tool.regex-tester.noMatches") + "</div>" +
         "</div>";
       return box;
     },
@@ -79,12 +79,12 @@
           countEl.textContent = matches.length;
           timeEl.textContent = elapsed;
           if (matches.length === 0) {
-            details.textContent = "No matches found";
+            details.textContent = __("tool.regex-tester.noMatchesFound");
           } else {
             details.textContent = matches.map(function (m, i) {
-              var line = "Match #" + (i + 1) + " at " + m.index + ": \"" + m.full + "\"";
+              var line = __("tool.regex-tester.matchAt") + (i + 1) + " " + __("tool.regex-tester.at") + " " + m.index + ": \"" + m.full + "\"";
               if (m.groups.length > 0) {
-                line += "\n" + m.groups.map(function (g, j) { return "  Group " + (j + 1) + ": \"" + g + "\""; }).join("\n");
+                line += "\n" + m.groups.map(function (g, j) { return "  " + __("tool.regex-tester.group") + " " + (j + 1) + ": \"" + g + "\""; }).join("\n");
               }
               return line;
             }).join("\n\n");
@@ -102,7 +102,7 @@
         input.value = "";
         countEl.textContent = "0";
         timeEl.textContent = "0";
-        details.textContent = "No matches";
+        details.textContent = __("tool.regex-tester.noMatches");
       });
       test();
     },

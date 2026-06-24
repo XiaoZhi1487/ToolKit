@@ -1,4 +1,4 @@
-﻿// Tool :: Text Diff Checker
+// Tool :: Text Diff Checker
 (function () {
   var id = "text-diff";
   var title = "Text Diff Checker";
@@ -42,21 +42,21 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
         "<div class=\"grid-2\">" +
-        "  <div style=\"display:flex;flex-direction:column\"><label>Original Text</label><textarea id=\"diffA\" rows=\"8\" style=\"flex:1\"></textarea></div>" +
-        "  <div style=\"display:flex;flex-direction:column\"><label>Changed Text</label><textarea id=\"diffB\" rows=\"8\" style=\"flex:1\"></textarea></div>" +
+        "  <div style=\"display:flex;flex-direction:column\"><label>" + __("tool.text-diff.originalText") + "</label><textarea id=\"diffA\" rows=\"8\" style=\"flex:1\"></textarea></div>" +
+        "  <div style=\"display:flex;flex-direction:column\"><label>" + __("tool.text-diff.changedText") + "</label><textarea id=\"diffB\" rows=\"8\" style=\"flex:1\"></textarea></div>" +
         "</div>" +
         "<div class=\"btn-group\">" +
-        "  <button class=\"btn btn-primary\" id=\"diffRunBtn\">Compare</button>" +
-        "  <button class=\"btn btn-secondary\" id=\"diffClearBtn\">Clear</button>" +
+        "  <button class=\"btn btn-primary\" id=\"diffRunBtn\">" + __("tool.text-diff.compare") + "</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"diffClearBtn\">" + __("common.clear") + "</button>" +
         "</div>" +
-        "<label>Difference</label>" +
-        "<div class=\"output-box\" id=\"diffOutput\" style=\"font-family:var(--font-mono);font-size:0.75rem;line-height:1.8;max-height:400px;overflow-y:auto;padding:8px 12px\">Waiting for comparison...</div>" +
+        "<label>" + __("tool.text-diff.difference") + "</label>" +
+        "<div class=\"output-box\" id=\"diffOutput\" style=\"font-family:var(--font-mono);font-size:0.75rem;line-height:1.8;max-height:400px;overflow-y:auto;padding:8px 12px\">" + __("common.waiting") + "</div>" +
         "<div class=\"flex-row\" style=\"gap:16px\">" +
-        "  <span style=\"font-size:0.75rem;color:var(--text-tertiary)\"><span style=\"display:inline-block;width:12px;height:12px;background:var(--green-soft);border:1px solid var(--green);border-radius:2px;vertical-align:middle\"></span> Added</span>" +
-        "  <span style=\"font-size:0.75rem;color:var(--text-tertiary)\"><span style=\"display:inline-block;width:12px;height:12px;background:var(--red-soft);border:1px solid var(--red);border-radius:2px;vertical-align:middle\"></span> Removed</span>" +
+        "  <span style=\"font-size:0.75rem;color:var(--text-tertiary)\"><span style=\"display:inline-block;width:12px;height:12px;background:var(--green-soft);border:1px solid var(--green);border-radius:2px;vertical-align:middle\"></span> " + __("tool.text-diff.added") + "</span>" +
+        "  <span style=\"font-size:0.75rem;color:var(--text-tertiary)\"><span style=\"display:inline-block;width:12px;height:12px;background:var(--red-soft);border:1px solid var(--red);border-radius:2px;vertical-align:middle\"></span> " + __("tool.text-diff.removed") + "</span>" +
         "</div>" +
         "</div>";
       return box;
@@ -70,7 +70,7 @@
 
       function compare() {
         var a = diffA.value, b = diffB.value;
-        if (!a && !b) { output.textContent = "Enter text in both panels"; return; }
+        if (!a && !b) { output.textContent = __("common.waiting"); return; }
         var diffs = diffLines(a, b);
         output.innerHTML = diffs.map(function (d) {
           var bg = d.type === "same" ? "transparent" : d.type === "added" ? "var(--green-soft)" : "var(--red-soft)";
@@ -84,7 +84,7 @@
       }
 
       runBtn.addEventListener("click", compare);
-      clearBtn.addEventListener("click", function () { diffA.value = ""; diffB.value = ""; output.textContent = "Cleared"; });
+      clearBtn.addEventListener("click", function () { diffA.value = ""; diffB.value = ""; output.textContent = __("common.waiting"); });
 
       diffA.value = "Hello World\nThis is a test\nLine three\nLine four";
       diffB.value = "Hello World\nThis is a test\nModified line\nLine four\nNew line";

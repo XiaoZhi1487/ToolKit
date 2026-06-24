@@ -1,4 +1,4 @@
-﻿// Tool :: Base64 Encoder / Decoder - Enhanced with file support
+// Tool :: Base64 Encoder / Decoder - Enhanced with file support
 (function () {
   var id = "base64";
   var title = "Base64 Encode / Decode";
@@ -11,27 +11,27 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
         "<div class=\"tab-bar\" id=\"b64TabBar\">" +
-        "  <button class=\"tab-btn active\" data-tab=\"encode\">Encode</button>" +
-        "  <button class=\"tab-btn\" data-tab=\"decode\">Decode</button>" +
-        "  <button class=\"tab-btn\" data-tab=\"file\">File to Base64</button>" +
+        "  <button class=\"tab-btn active\" data-tab=\"encode\">" + __("tool.base64.tabEncode") + "</button>" +
+        "  <button class=\"tab-btn\" data-tab=\"decode\">" + __("tool.base64.tabDecode") + "</button>" +
+        "  <button class=\"tab-btn\" data-tab=\"file\">" + __("tool.base64.tabFile") + "</button>" +
         "</div>" +
-        "<textarea id=\"b64Input\" rows=\"5\" placeholder=\"Enter text...\" spellcheck=\"false\"></textarea>" +
+        "<textarea id=\"b64Input\" rows=\"5\" placeholder=\"" + __("tool.base64.enterText") + "...\" spellcheck=\"false\"></textarea>" +
         "<div id=\"b64FileArea\" style=\"display:none\">" +
-        "  <label>Upload File</label>" +
-        "  <div id=\"b64Dropzone\" style=\"border:2px dashed var(--bg-input-border);border-radius:var(--radius-md);padding:30px 20px;text-align:center;color:var(--text-tertiary);cursor:pointer\">Click to select file</div>" +
+        "  <label>" + __("tool.base64.uploadFile") + "</label>" +
+        "  <div id=\"b64Dropzone\" style=\"border:2px dashed var(--bg-input-border);border-radius:var(--radius-md);padding:30px 20px;text-align:center;color:var(--text-tertiary);cursor:pointer\">" + __("tool.base64.clickToSelect") + "</div>" +
         "  <div style=\"font-size:0.75rem;color:var(--text-tertiary);margin-top:4px\" id=\"b64FileName\"></div>" +
         "</div>" +
         "<div class=\"btn-group\">" +
-        "  <button class=\"btn btn-primary\" id=\"b64RunBtn\">Execute</button>" +
-        "  <button class=\"btn btn-secondary\" id=\"b64SwapBtn\">Swap</button>" +
-        "  <button class=\"btn btn-secondary\" id=\"b64ClearBtn\">Clear</button>" +
+        "  <button class=\"btn btn-primary\" id=\"b64RunBtn\">" + __("common.execute") + "</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"b64SwapBtn\">" + __("common.swap") + "</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"b64ClearBtn\">" + __("common.clear") + "</button>" +
         "</div>" +
-        "<label>Result</label>" +
+        "<label>" + __("common.result") + "</label>" +
         "<textarea id=\"b64Output\" rows=\"4\" readonly style=\"font-family:var(--font-mono);font-size:0.75rem;word-break:break-all\"></textarea>" +
-        "<button class=\"btn btn-secondary\" id=\"b64CopyBtn\">Copy Result</button>" +
+        "<button class=\"btn btn-secondary\" id=\"b64CopyBtn\">" + __("common.copy") + "</button>" +
         "</div>";
       return box;
     },
@@ -60,7 +60,7 @@
         mode = btn.dataset.tab;
         if (mode === "file") { fileArea.style.display = "block"; input.style.display = "none"; }
         else { fileArea.style.display = "none"; input.style.display = ""; }
-        input.placeholder = mode === "encode" ? "Enter text..." : "Enter Base64...";
+        input.placeholder = mode === "encode" ? __("tool.base64.enterText") + "..." : __("tool.base64.enterBase64") + "...";
         run();
       });
 
@@ -97,7 +97,7 @@
       clearBtn.addEventListener("click", function () {
         input.value = ""; output.value = ""; fileInput.value = "";
         fileName.textContent = "";
-        dropzone.textContent = "Click to select file";
+        dropzone.textContent = __("tool.base64.clickToSelect");
       });
 
       copyBtn.addEventListener("click", function () { if (output.value) copyToClipboard(output.value); });
@@ -106,7 +106,7 @@
       fileInput.addEventListener("change", function () {
         if (fileInput.files[0]) {
           fileName.textContent = fileInput.files[0].name + " (" + Math.round(fileInput.files[0].size / 1024) + " KB)";
-          dropzone.textContent = "File selected";
+          dropzone.textContent = __("tool.base64.fileSelected");
         }
       });
     },

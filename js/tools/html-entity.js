@@ -1,4 +1,4 @@
-﻿// Tool :: HTML Entity Encoder / Decoder
+// Tool :: HTML Entity Encoder / Decoder
 (function () {
   var id = "html-entity";
   var title = "HTML Entity Converter";
@@ -31,20 +31,20 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
         "<div class=\"tab-bar\" id=\"heTabBar\">" +
-        "  <button class=\"tab-btn active\" data-mode=\"encode\">Encode</button>" +
-        "  <button class=\"tab-btn\" data-mode=\"decode\">Decode</button>" +
+        "  <button class=\"tab-btn active\" data-mode=\"encode\">" + __("tool.html-entity.tabEncode") + "</button>" +
+        "  <button class=\"tab-btn\" data-mode=\"decode\">" + __("tool.html-entity.tabDecode") + "</button>" +
         "</div>" +
-        "<textarea id=\"heInput\" rows=\"5\" placeholder=\"Enter text...\" spellcheck=\"false\">Hello <World> & \"Test\"</textarea>" +
+        "<textarea id=\"heInput\" rows=\"5\" placeholder=\"" + __("tool.html-entity.enterText") + "...\" spellcheck=\"false\">Hello <World> & \"Test\"</textarea>" +
         "<div class=\"btn-group\">" +
-        "  <button class=\"btn btn-primary\" id=\"heRunBtn\">Convert</button>" +
-        "  <button class=\"btn btn-secondary\" id=\"heSwapBtn\">Swap</button>" +
+        "  <button class=\"btn btn-primary\" id=\"heRunBtn\">" + __("common.convert") + "</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"heSwapBtn\">" + __("common.swap") + "</button>" +
         "</div>" +
-        "<label>Result</label>" +
-        "<div class=\"output-box\" id=\"heOutput\" style=\"word-break:break-all\">Result</div>" +
-        "<button class=\"btn btn-secondary\" id=\"heCopyBtn\">Copy</button>" +
+        "<label>" + __("common.result") + "</label>" +
+        "<div class=\"output-box\" id=\"heOutput\" style=\"word-break:break-all\">" + __("common.result") + "</div>" +
+        "<button class=\"btn btn-secondary\" id=\"heCopyBtn\">" + __("common.copy") + "</button>" +
         "</div>";
       return box;
     },

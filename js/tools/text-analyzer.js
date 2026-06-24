@@ -1,4 +1,4 @@
-﻿// Tool :: Text Analyzer - Enhanced
+// Tool :: Text Analyzer - Enhanced
 (function () {
   var id = "text-analyzer";
   var title = "Text Analyzer";
@@ -11,44 +11,44 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
-        "<label>Input Text</label>" +
-        "<textarea id=\"taInput\" rows=\"8\" placeholder=\"Paste or type text here...\"></textarea>" +
+        "<label>" + __("tool.text-analyzer.inputText") + "</label>" +
+        "<textarea id=\"taInput\" rows=\"8\" placeholder=\"" + __("tool.text-analyzer.placeholder") + "\"></textarea>" +
         "<div class=\"grid-2\">" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
         "    <div style=\"font-size:1.25rem;font-weight:700\" id=\"taChars\">0</div>" +
-        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">Characters</div>" +
+        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">" + __("tool.text-analyzer.characters") + "</div>" +
         "  </div>" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
         "    <div style=\"font-size:1.25rem;font-weight:700\" id=\"taCharsNoSpace\">0</div>" +
-        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">Chars (no space)</div>" +
+        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">" + __("tool.text-analyzer.charsNoSpace") + "</div>" +
         "  </div>" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
         "    <div style=\"font-size:1.25rem;font-weight:700\" id=\"taWords\">0</div>" +
-        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">Words</div>" +
+        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">" + __("tool.text-analyzer.words") + "</div>" +
         "  </div>" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
         "    <div style=\"font-size:1.25rem;font-weight:700\" id=\"taUnique\">0</div>" +
-        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">Unique Words</div>" +
+        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">" + __("tool.text-analyzer.uniqueWords") + "</div>" +
         "  </div>" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
         "    <div style=\"font-size:1.25rem;font-weight:700\" id=\"taSentences\">0</div>" +
-        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">Sentences</div>" +
+        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">" + __("tool.text-analyzer.sentences") + "</div>" +
         "  </div>" +
         "  <div class=\"output-box\" style=\"text-align:center;font-family:var(--font-sans)\">" +
         "    <div style=\"font-size:1.25rem;font-weight:700\" id=\"taParas\">0</div>" +
-        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">Paragraphs</div>" +
+        "    <div style=\"font-size:0.6875rem;color:var(--text-tertiary)\">" + __("tool.text-analyzer.paragraphs") + "</div>" +
         "  </div>" +
         "</div>" +
         "<div class=\"flex-row\" style=\"justify-content:space-between\">" +
-        "  <span style=\"font-size:0.8125rem\">Readability: <strong id=\"taReadability\">-</strong></span>" +
-        "  <span style=\"font-size:0.8125rem\">Reading time: <strong id=\"taReadTime\">0</strong> min</span>" +
-        "  <span style=\"font-size:0.8125rem\">Avg word length: <strong id=\"taAvgLen\">0</strong></span>" +
+        "  <span style=\"font-size:0.8125rem\">" + __("tool.text-analyzer.readability") + ": <strong id=\"taReadability\">-</strong></span>" +
+        "  <span style=\"font-size:0.8125rem\">" + __("tool.text-analyzer.readingTime") + ": <strong id=\"taReadTime\">0</strong> " + __("tool.text-analyzer.min") + "</span>" +
+        "  <span style=\"font-size:0.8125rem\">" + __("tool.text-analyzer.avgWordLen") + ": <strong id=\"taAvgLen\">0</strong></span>" +
         "</div>" +
         "<div class=\"btn-group\">" +
-        "  <button class=\"btn btn-secondary\" id=\"taCopyBtn\">Copy Stats</button>" +
-        "  <button class=\"btn btn-secondary\" id=\"taClearBtn\">Clear</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"taCopyBtn\">" + __("tool.text-analyzer.copyStats") + "</button>" +
+        "  <button class=\"btn btn-secondary\" id=\"taClearBtn\">" + __("common.clear") + "</button>" +
         "</div>" +
         "</div>";
       return box;
@@ -88,22 +88,22 @@
             syllables += wordArr[i].replace(/[^aeiouy]/g, "").length || 1;
           }
           var fkScore = 206.835 - 1.015 * (words / (sentences || 1)) - 84.6 * (syllables / words);
-          var level = fkScore > 90 ? "Very Easy" : fkScore > 80 ? "Easy" : fkScore > 70 ? "Fairly Easy" : fkScore > 60 ? "Standard" : fkScore > 50 ? "Fairly Difficult" : fkScore > 30 ? "Difficult" : "Very Difficult";
+          var level = fkScore > 90 ? __("tool.text-analyzer.veryEasy") : fkScore > 80 ? __("tool.text-analyzer.easy") : fkScore > 70 ? __("tool.text-analyzer.fairlyEasy") : fkScore > 60 ? __("tool.text-analyzer.standard") : fkScore > 50 ? __("tool.text-analyzer.fairlyDifficult") : fkScore > 30 ? __("tool.text-analyzer.difficult") : __("tool.text-analyzer.veryDifficult");
           document.getElementById("taReadability").textContent = Math.round(fkScore) + " (" + level + ")";
         }
       }
 
       copyBtn.addEventListener("click", function () {
-        var lines = ["=== Text Statistics ==="];
-        lines.push("Characters: " + document.getElementById("taChars").textContent);
-        lines.push("Characters (no spaces): " + document.getElementById("taCharsNoSpace").textContent);
-        lines.push("Words: " + document.getElementById("taWords").textContent);
-        lines.push("Unique Words: " + document.getElementById("taUnique").textContent);
-        lines.push("Sentences: " + document.getElementById("taSentences").textContent);
-        lines.push("Paragraphs: " + document.getElementById("taParas").textContent);
-        lines.push("Average Word Length: " + document.getElementById("taAvgLen").textContent);
-        lines.push("Reading Time: " + document.getElementById("taReadTime").textContent + " min");
-        lines.push("Readability: " + document.getElementById("taReadability").textContent);
+        var lines = ["=== " + __("tool.text-analyzer.characters") + " ==="];
+        lines.push(__("tool.text-analyzer.characters") + ": " + document.getElementById("taChars").textContent);
+        lines.push(__("tool.text-analyzer.charsNoSpace") + ": " + document.getElementById("taCharsNoSpace").textContent);
+        lines.push(__("tool.text-analyzer.words") + ": " + document.getElementById("taWords").textContent);
+        lines.push(__("tool.text-analyzer.uniqueWords") + ": " + document.getElementById("taUnique").textContent);
+        lines.push(__("tool.text-analyzer.sentences") + ": " + document.getElementById("taSentences").textContent);
+        lines.push(__("tool.text-analyzer.paragraphs") + ": " + document.getElementById("taParas").textContent);
+        lines.push(__("tool.text-analyzer.avgWordLen") + ": " + document.getElementById("taAvgLen").textContent);
+        lines.push(__("tool.text-analyzer.readingTime") + ": " + document.getElementById("taReadTime").textContent + " " + __("tool.text-analyzer.min"));
+        lines.push(__("tool.text-analyzer.readability") + ": " + document.getElementById("taReadability").textContent);
         copyToClipboard(lines.join("\n"));
       });
 

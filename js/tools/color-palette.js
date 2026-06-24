@@ -1,4 +1,4 @@
-﻿// Tool :: Color Palette - Enhanced with copy functionality
+// Tool :: Color Palette - Enhanced with copy functionality
 (function () {
   var id = "color-palette";
   var title = "Color Palette";
@@ -50,23 +50,23 @@
     render: function () {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + title + "</h2></div>" +
+      box.innerHTML = "<div class=\"tool-header\"><span class=\"tool-header-icon\">" + icon + "</span><h2>" + __('tool.' + id + '.title') + "</h2></div>" +
         "<div class=\"tool-content\">" +
-        "<label>Pick a Color</label>" +
+        "<label>" + __("tool.color-palette.pickColor") + "</label>" +
         "<input type=\"color\" id=\"cpPicker\" value=\"#6366f1\">" +
-        "<div class=\"color-preview\" id=\"cpPreview\" style=\"background:#6366f1;height:60px;border-radius:var(--radius-md);cursor:pointer\" title=\"Click to copy HEX\"></div>" +
+        "<div class=\"color-preview\" id=\"cpPreview\" style=\"background:#6366f1;height:60px;border-radius:var(--radius-md);cursor:pointer\" title=\"" + __("tool.color-palette.clickCopy") + " HEX\"></div>" +
         "<div class=\"grid-2\">" +
-        "  <div><label>HEX</label><div class=\"output-box\" id=\"cpHex\" style=\"cursor:pointer;font-size:0.8125rem\" title=\"Click to copy\">#6366f1</div></div>" +
-        "  <div><label>RGB</label><div class=\"output-box\" id=\"cpRgb\" style=\"cursor:pointer;font-size:0.8125rem\" title=\"Click to copy\">rgb(99,102,241)</div></div>" +
-        "  <div><label>HSL</label><div class=\"output-box\" id=\"cpHsl\" style=\"cursor:pointer;font-size:0.8125rem\" title=\"Click to copy\">hsl(239,84%,67%)</div></div>" +
+        "  <div><label>HEX</label><div class=\"output-box\" id=\"cpHex\" style=\"cursor:pointer;font-size:0.8125rem\" title=\"" + __("tool.color-palette.clickCopy") + "\">#6366f1</div></div>" +
+        "  <div><label>RGB</label><div class=\"output-box\" id=\"cpRgb\" style=\"cursor:pointer;font-size:0.8125rem\" title=\"" + __("tool.color-palette.clickCopy") + "\">rgb(99,102,241)</div></div>" +
+        "  <div><label>HSL</label><div class=\"output-box\" id=\"cpHsl\" style=\"cursor:pointer;font-size:0.8125rem\" title=\"" + __("tool.color-palette.clickCopy") + "\">hsl(239,84%,67%)</div></div>" +
         "  <div><label>CSS Variable</label><input type=\"text\" id=\"cpVarName\" value=\"--accent-1\"></div>" +
         "</div>" +
-        "<label>Palette Generator</label>" +
+        "<label>" + __("tool.color-palette.paletteGen") + "</label>" +
         "<div class=\"btn-group\">" +
-        "  <button class=\"btn btn-secondary\" data-palette=\"mono\">Monochromatic</button>" +
-        "  <button class=\"btn btn-secondary\" data-palette=\"complement\">Complementary</button>" +
-        "  <button class=\"btn btn-secondary\" data-palette=\"triad\">Triadic</button>" +
-        "  <button class=\"btn btn-secondary\" data-palette=\"analogous\">Analogous</button>" +
+        "  <button class=\"btn btn-secondary\" data-palette=\"mono\">" + __("tool.color-palette.monochrome") + "</button>" +
+        "  <button class=\"btn btn-secondary\" data-palette=\"complement\">" + __("tool.color-palette.complement") + "</button>" +
+        "  <button class=\"btn btn-secondary\" data-palette=\"triad\">" + __("tool.color-palette.triad") + "</button>" +
+        "  <button class=\"btn btn-secondary\" data-palette=\"analogous\">" + __("tool.color-palette.analogous") + "</button>" +
         "</div>" +
         "<div class=\"color-swatch-grid\" id=\"cpSwatches\"></div>" +
         "</div>";
@@ -120,11 +120,11 @@
             break;
         }
         swatches.innerHTML = colors.map(function (c2) {
-          return "<div class=\"color-swatch\" style=\"background:" + c2 + "\" data-color=\"" + c2 + "\" title=\"Click to copy " + c2 + "\"></div>";
+          return "<div class=\"color-swatch\" style=\"background:" + c2 + "\" data-color=\"" + c2 + "\" title=\"" + __("tool.color-palette.clickCopy") + " " + c2 + "\"></div>";
         }).join("");
         swatches.querySelectorAll(".color-swatch").forEach(function (el) {
           el.addEventListener("click", function () { update(el.dataset.color); });
-          el.addEventListener("dblclick", function () { copyToClipboard(el.dataset.color); showCopyFeedback("Copied " + el.dataset.color); });
+          el.addEventListener("dblclick", function () { copyToClipboard(el.dataset.color); showCopyFeedback(__("tool.color-palette.copied") + " " + el.dataset.color); });
         });
       }
 

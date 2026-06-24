@@ -1,62 +1,60 @@
-﻿// Tool :: JSON Formatter
+// Tool :: JSON Formatter
 (function () {
-  const id = "json-formatter";
-  const title = "JSON 格式化";
-  const icon = "{ }";
-  const category = "开发者";
-  const description = "格式化、压缩和验证 JSON 数据";
+  var id = "json-formatter";
+  var title = "JSON Formatter";
+  var icon = "{ }";
+  var category = "Developer";
+  var description = "Format, compress, and validate JSON data";
 
   window.toolMeta.push({ id, title, icon, category, description });
 
   window.tools[id] = {
-    id, title, icon,
-    render() {
-      const box = document.createElement("div");
+    id: id, title: title, icon: icon,
+    render: function () {
+      var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = `
-        <div class="tool-header">
-          <span class="tool-header-icon">${icon}</span>
-          <h2>${title}</h2>
-        </div>
-        <div class="tool-content">
-          <div class="tab-bar" id="jsonTabBar">
-            <button class="tab-btn active" data-tab="format">格式化</button>
-            <button class="tab-btn" data-tab="compress">压缩</button>
-          </div>
-          <textarea id="jsonInput" rows="8" placeholder='{"name": "ToolKit", "version": 1}' spellcheck="false"></textarea>
-          <div class="btn-group">
-            <button class="btn btn-primary" id="jsonRunBtn">执行</button>
-            <button class="btn btn-secondary" id="jsonClearBtn">清空</button>
-          </div>
-          <div id="jsonError" style="font-size:0.8125rem;color:var(--red);min-height:20px"></div>
-          <div class="output-box" id="jsonOutput" style="white-space:pre;overflow:auto;max-height:400px">
-            等待输入…
-          </div>
-        </div>
-      `;
+      box.innerHTML = [
+        "<div class=\"tool-header\">",
+        "  <span class=\"tool-header-icon\">" + icon + "</span>",
+        "  <h2>" + __('tool.' + id + '.title') + "</h2>",
+        "</div>",
+        "<div class=\"tool-content\">",
+        "  <div class=\"tab-bar\" id=\"jsonTabBar\">",
+        "    <button class=\"tab-btn active\" data-tab=\"format\">" + __('tool.' + id + '.tabFormat') + "</button>",
+        "    <button class=\"tab-btn\" data-tab=\"compress\">" + __('tool.' + id + '.tabCompress') + "</button>",
+        "  </div>",
+        "  <textarea id=\"jsonInput\" rows=\"8\" placeholder='{\"name\": \"ToolKit\", \"version\": 1}' spellcheck=\"false\"></textarea>",
+        "  <div class=\"btn-group\">",
+        "    <button class=\"btn btn-primary\" id=\"jsonRunBtn\">" + __('common.execute') + "</button>",
+        "    <button class=\"btn btn-secondary\" id=\"jsonClearBtn\">" + __('common.clear') + "</button>",
+        "  </div>",
+        "  <div id=\"jsonError\" style=\"font-size:0.8125rem;color:var(--red);min-height:20px\"></div>",
+        "  <div class=\"output-box\" id=\"jsonOutput\" style=\"white-space:pre;overflow:auto;max-height:400px\">" + __('tool.' + id + '.waiting') + "</div>",
+        "</div>"
+      ].join("");
       return box;
     },
-    init() {
-      const input = document.getElementById("jsonInput");
-      const output = document.getElementById("jsonOutput");
-      const error = document.getElementById("jsonError");
-      const runBtn = document.getElementById("jsonRunBtn");
-      const clearBtn = document.getElementById("jsonClearBtn");
-      const tabBar = document.getElementById("jsonTabBar");
-      let mode = "format";
+    init: function () {
+      var input = document.getElementById("jsonInput");
+      var output = document.getElementById("jsonOutput");
+      var error = document.getElementById("jsonError");
+      var runBtn = document.getElementById("jsonRunBtn");
+      var clearBtn = document.getElementById("jsonClearBtn");
+      var tabBar = document.getElementById("jsonTabBar");
+      var mode = "format";
 
-      tabBar.addEventListener("click", (e) => {
-        const btn = e.target.closest(".tab-btn");
+      tabBar.addEventListener("click", function (e) {
+        var btn = e.target.closest(".tab-btn");
         if (!btn) return;
-        tabBar.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        tabBar.querySelectorAll(".tab-btn").forEach(function (b) { b.classList.remove("active"); });
         btn.classList.add("active");
         mode = btn.dataset.tab;
       });
 
-      const run = () => {
+      function run() {
         error.textContent = "";
         try {
-          const parsed = JSON.parse(input.value);
+          var parsed = JSON.parse(input.value);
           if (mode === "format") {
             output.textContent = JSON.stringify(parsed, null, 2);
           } else {
@@ -66,19 +64,19 @@
           error.textContent = "❌ " + e.message;
           output.textContent = input.value;
         }
-      };
+      }
 
       runBtn.addEventListener("click", run);
-      clearBtn.addEventListener("click", () => {
+      clearBtn.addEventListener("click", function () {
         input.value = "";
-        output.textContent = "等待输入…";
+        output.textContent = __('tool.' + id + '.waiting');
         error.textContent = "";
       });
-      input.addEventListener("keydown", (e) => {
+      input.addEventListener("keydown", function (e) {
         if ((e.ctrlKey || e.metaKey) && e.key === "Enter") run();
       });
       run();
     },
-    destroy() {}
+    destroy: function () {}
   };
 })();

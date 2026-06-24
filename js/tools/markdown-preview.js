@@ -1,4 +1,4 @@
-﻿// Tool :: Markdown Preview
+// Tool :: Markdown Preview
 (function () {
   var id = "markdown-preview";
   var title = "Markdown Preview";
@@ -29,21 +29,21 @@
     render: function() {
       var box = document.createElement("div");
       box.className = "tool-body";
-      box.innerHTML = '<div class="tool-header"><span class="tool-header-icon">' + icon + '</span><h2>' + title + '</h2></div>' +
+      box.innerHTML = '<div class="tool-header"><span class="tool-header-icon">' + icon + '</span><h2>' + __('tool.' + id + '.title') + '</h2></div>' +
         '<div class="tool-content">' +
         '<div class="grid-2" style="min-height:400px">' +
         '<div style="display:flex;flex-direction:column">' +
-        '<label>Markdown</label>' +
+        '<label>' + __("tool.markdown-preview.markdown") + '</label>' +
         '<textarea id="mdInput" rows="16" style="flex:1;resize:none;font-family:var(--font-mono);font-size:0.8125rem">' + DEFAULT_MD + '</textarea>' +
         '</div>' +
         '<div style="display:flex;flex-direction:column">' +
-        '<label>Preview</label>' +
+        '<label>' + __("tool.markdown-preview.preview") + '</label>' +
         '<div class="output-box markdown-output" id="mdPreview" style="flex:1;overflow-y:auto;min-height:300px"></div>' +
         '</div>' +
         '</div>' +
         '<div class="btn-group">' +
-        '<button class="btn btn-secondary" id="mdCopyHtmlBtn">Copy HTML</button>' +
-        '<button class="btn btn-secondary" id="mdClearBtn">Clear</button>' +
+        '<button class="btn btn-secondary" id="mdCopyHtmlBtn">' + __("tool.markdown-preview.copyHtml") + '</button>' +
+        '<button class="btn btn-secondary" id="mdClearBtn">' + __("common.clear") + '</button>' +
         '</div>' +
         '</div>';
       return box;
