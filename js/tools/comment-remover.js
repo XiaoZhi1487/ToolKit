@@ -1,9 +1,9 @@
 (function () {
-  var id = "text-cleaner";
-  var title = "Text Cleaner";
-  var icon = "\ud83e\uddf9";
-  var category = "AI";
-  var description = "Clean and denoise text for training data";
+  var id = "comment-remover";
+  var title = "Comment Remover";
+  var icon = "\u2716";
+  var category = "Developer";
+  var description = "Remove comments from code";
   window.toolMeta.push({ id, title, icon, category, description });
   window.tools[id] = {
     id: id, title: title, icon: icon,
@@ -15,7 +15,7 @@
         "<div class=\"grid-2\">" +
         "<div>" +
         "<label>" + __('tool.' + id + '.input') + "</label>" +
-        "<textarea class=\"code-input\" id=\"" + id + "-input\" placeholder=\"Text with extra newlines and html...\"></textarea>" +
+        "<textarea class=\"code-input\" id=\"" + id + "-input\" placeholder=\"// comment\\nconsole.log('test');\"></textarea>" +
         "</div>" +
         "<div>" +
         "<label>" + __('tool.' + id + '.output') + "</label>" +
@@ -23,15 +23,16 @@
         "</div>" +
         "</div>" +
         "<div class=\"form-row\">" +
-        "<label>" + __('tool.' + id + '.html') + "</label>" +
-        "<input type=\"checkbox\" id=\"" + id + "-html\" checked>" +
-        "<label>" + __('tool.' + id + '.whitespace') + "</label>" +
-        "<input type=\"checkbox\" id=\"" + id + "-whitespace\" checked>" +
-        "<label>" + __('tool.' + id + '.special') + "</label>" +
-        "<input type=\"checkbox\" id=\"" + id + "-special\">" +
+        "<label>" + __('tool.' + id + '.language') + "</label>" +
+        "<select class=\"input\" id=\"" + id + "-language\">" +
+        "<option value=\"js\">JavaScript</option>" +
+        "<option value=\"css\">CSS</option>" +
+        "<option value=\"html\">HTML</option>" +
+        "<option value=\"all\">All</option>" +
+        "</select>" +
         "</div>" +
         "<div class=\"btn-group\">" +
-        "<button class=\"btn btn-primary\" id=\"" + id + "-clean\">" + __('tool.' + id + '.clean') + "</button>" +
+        "<button class=\"btn btn-primary\" id=\"" + id + "-remove\">" + __('tool.' + id + '.remove') + "</button>" +
         "<button class=\"btn\" id=\"" + id + "-copy\">" + __('tool.' + id + '.copy') + "</button>" +
         "<button class=\"btn\" id=\"" + id + "-clear\">" + __('tool.' + id + '.clear') + "</button>" +
         "</div>" +
@@ -39,20 +40,25 @@
 
       var input = box.querySelector("#" + id + "-input");
       var output = box.querySelector("#" + id + "-output");
-      var htmlInput = box.querySelector("#" + id + "-html");
-      var whitespaceInput = box.querySelector("#" + id + "-whitespace");
-      var specialInput = box.querySelector("#" + id + "-special");
+      var languageInput = box.querySelector("#" + id + "-language");
 
-      box.querySelector("#" + id + "-clean").addEventListener("click", function () {
-        var text = input.value;
-        if (htmlInput.checked) text = text.replace(/<[^>]*>/g, '');
-        if (whitespaceInput.checked) {
-          text = text.replace(/\s+/g, ' ').trim();
+      function removeComments(text, lang) {
+        if (lang === 'js' || lang === 'all') {
+          text = text.replace(/\/\/.*$/gm, '');
+          text = text.replace(/\/\*[\s\S]*?\*\//g, '');
         }
-        if (specialInput.checked) {
-          text = text.replace(/[\x00-\x1F\x7F-\xFF]/g, '');
+        if (lang === 'css' || lang === 'all') {
+          text = text.replace(/\/\*[\s\S]*?\*\//g, '');
         }
-        output.value = text;
+        if (lang === 'html' || lang === 'all') {
+          text = text.replace(/<!--[\s\S]*?-->/g, '');
+        }
+        text = text.replace(/^\s*\n/gm, '');
+        return text.trim();
+      }
+
+      box.querySelector("#" + id + "-remove").addEventListener("click", function () {
+        output.value = removeComments(input.value, languageInput.value);
       });
 
       box.querySelector("#" + id + "-copy").addEventListener("click", function () {
