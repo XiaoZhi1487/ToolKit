@@ -16,7 +16,7 @@ var App = {
       backBtn: $id('backBtn'),
       themeToggle: $id('themeToggle'),
       langToggle: $id('langToggle'),
-      toolCount: $id('toolCount'),
+      
       navMenuBtn: $id('navMenuBtn'),
       mobileCatPanel: $id('mobileCatPanel'),
       mobileCatInner: $id('mobileCatInner'),
@@ -124,6 +124,7 @@ var App = {
     var self = this;
 
     grid.innerHTML = '';
+    var frag = document.createDocumentFragment();
     this.meta.forEach(function (t) {
       if (cat !== 'all' && t.category !== cat) return;
       var title = getToolTitle(t);
@@ -133,7 +134,7 @@ var App = {
       count++;
       var card = document.createElement('div');
       card.className = 'tool-card';
-      card.style.animationDelay = String(count * 0.04) + 's';
+      card.style.animationDelay = String((count - 1) * 0.025) + 's';
       card.innerHTML = [
         '<span class="tool-card-icon">' + t.icon + '</span>',
         '<div class="tool-card-title">' + title + '</div>',
@@ -141,14 +142,12 @@ var App = {
         '<span class="tool-card-cat">' + catName + '</span>'
       ].join('');
       card.addEventListener('click', function () { self.openTool(t.id); });
-      grid.appendChild(card);
+      frag.appendChild(card);
     });
+    grid.appendChild(frag);
 
     if (count === 0) {
       grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--text-tertiary)">' + __('home.noMatch') + '</div>';
-    }
-    if (this._cache.toolCount) {
-      this._cache.toolCount.textContent = String(count);
     }
     // Update the i18n count text
     var countEl = qs('[data-i18n="home.tools.count"]');
@@ -165,7 +164,7 @@ var App = {
     this._cache.toolContainer.innerHTML = '';
     this._cache.toolContainer.appendChild(tool.render());
     location.hash = 'tool-' + id;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0 });
     if (tool.init) tool.init();
   },
 

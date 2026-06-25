@@ -129,10 +129,10 @@
       }
 
       picker.addEventListener("input", function () { update(picker.value); });
-      hex.addEventListener("click", function () { copyToClipboard(hex.textContent); showCopyFeedback("Copied " + hex.textContent); });
-      rgb.addEventListener("click", function () { copyToClipboard(rgb.textContent); showCopyFeedback("Copied " + rgb.textContent); });
-      hsl.addEventListener("click", function () { copyToClipboard(hsl.textContent); showCopyFeedback("Copied " + hsl.textContent); });
-      preview.addEventListener("click", function () { copyToClipboard(hex.textContent); showCopyFeedback("Copied " + hex.textContent); });
+      hex.addEventListener("click", function () { copyToClipboard(hex.textContent); showCopyFeedback(__("tool.color-palette.copied") + " " + hex.textContent); });
+      rgb.addEventListener("click", function () { copyToClipboard(rgb.textContent); showCopyFeedback(__("tool.color-palette.copied") + " " + rgb.textContent); });
+      hsl.addEventListener("click", function () { copyToClipboard(hsl.textContent); showCopyFeedback(__("tool.color-palette.copied") + " " + hsl.textContent); });
+      preview.addEventListener("click", function () { copyToClipboard(hex.textContent); showCopyFeedback(__("tool.color-palette.copied") + " " + hex.textContent); });
 
       document.querySelectorAll("[data-palette]").forEach(function (btn) {
         btn.addEventListener("click", function () { generatePalette(btn.dataset.palette); });

@@ -106,9 +106,10 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: var(--nav-height);
   background: var(--bg-nav);
-  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--bg-nav-border);
   transition: background var(--transition-slow), border-color var(--transition-slow);
+  will-change: transform;
 }
 .nav-inner {
   max-width: 1200px; margin: 0 auto; padding: 0 24px;
@@ -154,7 +155,7 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 .nav-menu-btn { display: none; }
 
 .main { flex: 1; padding-top: var(--nav-height); max-width: 1200px; margin: 0 auto; width: 100%; }
-.home-section { padding: 48px 24px 80px; animation: fadeIn 0.4s ease; }
+.home-section { padding: 48px 24px 80px; animation: fadeIn 0.4s ease; content-visibility: auto; contain: layout style paint; contain-intrinsic-size: 800px; }
 .home-header { text-align: center; margin-bottom: 48px; }
 .home-title {
   font-size: 2.25rem; font-weight: 700; letter-spacing: -0.03em;
@@ -162,13 +163,14 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   background-clip: text; margin-bottom: 8px;
 }
 .home-subtitle { color: var(--text-secondary); font-size: 0.9375rem; }
-.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; contain: layout style; }
 
 .tool-card {
   position: relative; background: var(--bg-card); border: 1px solid var(--bg-card-border);
   border-radius: var(--radius-lg); padding: 24px; cursor: pointer;
-  transition: all var(--transition-slow); box-shadow: var(--shadow-card);
-  backdrop-filter: blur(8px); animation: cardIn 0.35s ease both;
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow), background var(--transition-slow), border-color var(--transition-slow);
+  box-shadow: var(--shadow-card);
+  content-visibility: auto; contain: layout style paint;
 }
 .tool-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-card-hover); border-color: transparent; background: var(--bg-surface); }
 .tool-card-icon { font-size: 1.75rem; margin-bottom: 12px; display: block; }
@@ -176,7 +178,7 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 .tool-card-desc { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .tool-card-cat { display: inline-block; margin-top: 12px; padding: 2px 10px; font-size: 0.6875rem; font-weight: 500; border-radius: 20px; color: var(--accent-1); background: var(--accent-soft); }
 
-.tool-section { padding: 32px 24px 80px; animation: fadeIn 0.3s ease; }
+.tool-section { padding: 32px 24px 80px; animation: fadeIn 0.3s ease; contain: layout style paint; }
 .back-btn {
   display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
   border-radius: var(--radius-md); font-size: 0.875rem; font-weight: 500;
@@ -222,13 +224,14 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 .output-box .copy-btn { position: absolute; top: 8px; right: 8px; padding: 4px 8px; font-size: 0.6875rem; border-radius: var(--radius-sm); background: var(--bg-surface); color: var(--text-tertiary); border: 1px solid var(--bg-card-border); opacity: 0; transition: opacity var(--transition); }
 .output-box:hover .copy-btn { opacity: 1; }
 
-.footer { border-top: 1px solid var(--bg-nav-border); background: var(--bg-glass); backdrop-filter: blur(8px); }
+.footer { border-top: 1px solid var(--bg-nav-border); background: var(--bg-glass); contain: layout style; }
 .footer-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.8125rem; color: var(--text-tertiary); }
 .footer-dot { color: var(--bg-input-border); }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes cardIn { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cardIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.tool-card { animation: cardIn 0.25s ease both; }
 
 .toggle-wrap { display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
 .toggle-wrap input[type="checkbox"] { appearance: none; width: 38px; height: 22px; border-radius: 11px; background: var(--bg-input-border); border: none; cursor: pointer; position: relative; transition: background var(--transition); flex-shrink: 0; }

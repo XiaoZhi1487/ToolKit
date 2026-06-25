@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -15,10 +16,7 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#" class="nav-brand" data-nav="home">
-        <svg class="nav-logo" width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <rect x="2" y="2" width="24" height="24" rx="6" stroke="currentColor" stroke-width="2"/>
-          <path d="M9 10h10M9 14h10M9 18h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <img src="千工logo.png" class="nav-logo" alt="Logo" width="28" height="28">
         <span data-i18n="brand">千工</span>
       </a>
       <div class="nav-center">
@@ -64,7 +62,7 @@
     <section class="home-section" id="homeSection">
       <div class="home-header">
         <h1 class="home-title" data-i18n="home.title">实用工具集</h1>
-        <p class="home-subtitle"><span data-i18n="home.subtitle">免费 · 在线 · 无需安装</span> &nbsp;|&nbsp; <span id="toolCount">20</span> <span data-i18n="home.tools.count" data-i18n-html="true">个工具 · 持续增长中</span></p>
+        <p class="home-subtitle"><span data-i18n="home.subtitle">免费 · 在线 · 无需安装</span> &nbsp;|&nbsp; <span data-i18n="home.tools.count" data-i18n-html="true">30 个工具 · 持续增长中</span></p>
       </div>
       <div class="tools-grid" id="toolsGrid"></div>
     </section>
@@ -119,5 +117,85 @@
   <script src="js/tools/csv-json.js"></script>
   <script src="js/tools/text-diff.js"></script>
   <script src="js/tools/hash-generator.js"></script>
+  <script src="js/tools/age-calculator.js"></script>
+  <script src="js/tools/bmi-calculator.js"></script>
+  <script src="js/tools/unit-converter.js"></script>
+  <script src="js/tools/date-duration.js"></script>
+  <script src="js/tools/css-gradient.js"></script>
+  <script src="js/tools/text-to-slug.js"></script>
+  <script src="js/tools/random-number.js"></script>
+  <script src="js/tools/list-randomizer.js"></script>
+  <script src="js/tools/duplicate-remover.js"></script>
+  <script src="js/tools/number-to-words.js"></script>
+  <script src="js/tools/sql-formatter.js"></script>
+  <script src="js/tools/jwt-decoder.js"></script>
+  <script src="js/tools/yaml-json.js"></script>
+  <script src="js/tools/css-units.js"></script>
+  <script src="js/tools/http-status.js"></script>
+  <script src="js/tools/color-contrast.js"></script>
+  <script src="js/tools/cron-gen.js"></script>
+  <script src="js/tools/ua-parser.js"></script>
+  <script src="js/tools/gitignore.js"></script>
+  <script src="js/tools/xml-json.js"></script>
+  <script src="js/tools/html-minifier.js"></script>
+  <script src="js/tools/css-minifier.js"></script>
+  <script src="js/tools/js-minifier.js"></script>
+  <script src="js/tools/text-encryption.js"></script>
+  <script src="js/tools/ascii-art.js"></script>
+  <script src="js/tools/mime-lookup.js"></script>
+  <script src="js/tools/cookie-parser.js"></script>
+  <script src="js/tools/svg-dataurl.js"></script>
+  <script src="js/tools/json-path.js"></script>
+  <script src="js/tools/gzip-string.js"></script>
+  <script src="js/tools/color-palette-scheme.js"></script>
+  <script src="js/tools/font-pairing.js"></script>
+  <script src="js/tools/design-tokens.js"></script>
+  <script src="js/tools/svg-optimizer.js"></script>
+  <script src="js/tools/grid-generator.js"></script>
+  <script src="js/tools/box-shadow.js"></script>
+  <script src="js/tools/border-radius.js"></script>
+  <script src="js/tools/type-scale.js"></script>
+  <script src="js/tools/spacing-scale.js"></script>
+  <script src="js/tools/favicon-gen.js"></script>
+  <!-- New Tools -->
+  <script src="js/tools/angle-converter.js"></script>
+  <script src="js/tools/area-converter.js"></script>
+  <script src="js/tools/audio-waveform.js"></script>
+  <script src="js/tools/barcode-gen.js"></script>
+  <script src="js/tools/byte-converter.js"></script>
+  <script src="js/tools/caesar-cipher.js"></script>
+  <script src="js/tools/calendar-view.js"></script>
+  <script src="js/tools/color-converter.js"></script>
+  <script src="js/tools/color-picker.js"></script>
+  <script src="js/tools/countdown-timer.js"></script>
+  <script src="js/tools/credit-card-validator.js"></script>
+  <script src="js/tools/emoji-picker.js"></script>
+  <script src="js/tools/file-hash.js"></script>
+  <script src="js/tools/image-converter.js"></script>
+  <script src="js/tools/image-cropper.js"></script>
+  <script src="js/tools/image-filter.js"></script>
+  <script src="js/tools/image-resizer.js"></script>
+  <script src="js/tools/loan-calculator.js"></script>
+  <script src="js/tools/meme-generator.js"></script>
+  <script src="js/tools/note-pad.js"></script>
+  <script src="js/tools/palindrome-checker.js"></script>
+  <script src="js/tools/password-strength.js"></script>
+  <script src="js/tools/pressure-converter.js"></script>
+  <script src="js/tools/random-token.js"></script>
+  <script src="js/tools/roman-numeral.js"></script>
+  <script src="js/tools/speed-converter.js"></script>
+  <script src="js/tools/stopwatch.js"></script>
+  <script src="js/tools/text-cleaner.js"></script>
+  <script src="js/tools/text-encoder.js"></script>
+  <script src="js/tools/text-replacer.js"></script>
+  <script src="js/tools/text-reverser.js"></script>
+  <script src="js/tools/text-sorter.js"></script>
+  <script src="js/tools/text-to-ascii.js"></script>
+  <script src="js/tools/tip-calculator.js"></script>
+  <script src="js/tools/todo-list.js"></script>
+  <script src="js/tools/unit-price.js"></script>
+  <script src="js/tools/world-clock.js"></script>
+  <script src="js/tools/xor-cipher.js"></script>
+  <script src="js/tools/vigenere-cipher.js"></script>
 </body>
 </html>
