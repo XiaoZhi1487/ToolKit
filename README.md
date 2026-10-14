@@ -14,6 +14,18 @@
 
 ---
 
+## 📸 界面预览
+
+**首页 · 浅色主题**
+
+![千工首页](docs/screenshots/千工首页.png)
+
+**工具示例 · 深色主题**（提示词工程师）
+
+![千工工具示例](docs/screenshots/千工工具示例.png)
+
+---
+
 ## 💡 这是什么？
 
 **千工 · 工具箱** 是一站式的在线实用工具集合，把日常开发、办公、学习中最常用的小工具汇聚到一起，共 **140+ 款工具**，覆盖 **9 大分类**：
@@ -82,6 +94,18 @@ npx serve .
 **🚀 [Launch Now → https://toolkit-qiangong.netlify.app/#](https://toolkit-qiangong.netlify.app/#)**
 
 No sign-up, no download, just open and use.
+
+---
+
+## 📸 Screenshots
+
+**Homepage · Light Theme**
+
+![QianGong Homepage](docs/screenshots/千工首页.png)
+
+**Tool Example · Dark Theme** (Prompt Engineer)
+
+![QianGong Tool Example](docs/screenshots/千工工具示例.png)
 
 ---
 
